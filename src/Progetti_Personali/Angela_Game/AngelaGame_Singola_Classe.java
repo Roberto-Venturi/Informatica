@@ -1,8 +1,8 @@
 package Progetti_Personali.Angela_Game;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
-
-import static java.lang.System.exit;
 
 /**
  * Questo gioco fu presentato come programma "demo" per la Olivetti Programma 101 (sigla P101)
@@ -33,7 +33,7 @@ import static java.lang.System.exit;
  *
  * @author Roberto Venturi aka Roven60
  */
-public class AngelaGame {
+public class AngelaGame_Singola_Classe {
 
   static final String INTRO =
       """
@@ -49,26 +49,6 @@ public class AngelaGame {
   static int human = -1;
   static int computer = -1;
   static int progressive = 0;
-  static final int[][] goodMoves = {  //remaining and good move(s)
-      {18, 1, 4}, //1 OK, 4+3 = 3/4
-      {17, 4, 3}, //4 OK, 3+1 = 3/4
-      {16, 5, 4}, //OK
-      {15, 6, 3}, //OK
-      {14, 5, 6}, //5 OK, 6+3+1 = 3/4
-      {13, 4, 2}, //OK
-      {12, 4, 2}, //4 OK, 2+1 = 3/4
-      {11, 3, 2}, //OK
-      {10, 5, 1}, //OK
-      {9, 3, 1},  //3+1 = 3/4
-      {8, 4, 3},  //4 OK, 3 = 2/3
-      {7, 6, 4},  //OK
-      {6, 6, 3},  //OK
-      {5, 5, 2},  //5 OK, 2 = 1/2
-      {4, 4, 2},  //4 OK
-      {3, 3, 2},  //3 OK
-      {2, 2, 1},  //OK
-      {1, 1, 2},  //1 OK
-  };
 
   //****************//
   //*** ROUTINES ***//
@@ -100,8 +80,6 @@ public class AngelaGame {
 
   /**
    * Metodo che chiede all'utente il valore da usare come obiettivo
-   *
-   * @return il valore (intero) dell'obiettivo
    */
   static void getTarget() {
     while (target < 7 && target != -1) {
@@ -129,6 +107,7 @@ public class AngelaGame {
 
   /**
    * Metodo che chiede all'utente il numero da giocare
+   * e aggiorna il progressivo
    */
   static void getHumanMove() {
     String msg;
@@ -146,6 +125,8 @@ public class AngelaGame {
       human = 0;
       while (human < 1 || human > 6 || human == computer || human == (7 - computer)) {
         human = getIntInput(msg, 1, 6);
+        if (human == computer || human == (7 - computer))
+          msg = String.format("                  numero (non %d ne %d)", computer, (7 - computer));
       }
     }
     progressive += human;
@@ -153,24 +134,11 @@ public class AngelaGame {
 
   /**
    * Metodo che calcola il numero da giocare per il computer
+   * e aggiorna il progressivo
    */
   static void getComputerMove() {
-    computer = 0;
-    int remaining = target - progressive;
-    // una ricerca binaria sarebbe più efficiente ma vale la pena?
-    for (int ii = 0; ii < goodMoves.length; ii++) {
-      if (goodMoves[ii][0] == remaining) {
-        if (human != goodMoves[ii][1] && human != (7 - goodMoves[ii][1]))
-          computer = goodMoves[ii][1];
-        else {
-          if (goodMoves[ii].length > 2)
-            computer = goodMoves[ii][2];
-        }
-        break;
-      }
-    }
-    if (computer == 0) {  //non abbiamo mosse studiate: che fare?
-      //TODO
+    computer = canWin(target - progressive, human);
+    if (computer == 0) {
       if (human != 6 && human != 1)
         computer = 1;
       else
@@ -179,9 +147,49 @@ public class AngelaGame {
     progressive += computer;
   }
 
+  private static final Map<String, Integer> movesList = new HashMap<>();
+
+  /**
+   *
+   * @param remaining = target - progressive
+   * @param lastMove  last human move
+   * @return  one of winning moves (if one exist) or 0
+   */
+  public static int canWin(int remaining, int lastMove) {
+    // Chi porta il target a 0 vince ma se è già 0 abbiamo perso.
+    if (remaining <= 0) return 0;
+
+    String stateKey = remaining + "-" + lastMove;
+    if (movesList.containsKey(stateKey)) return movesList.get(stateKey);
+
+    // Verifica mosse possibili
+    for (int mossa = 1; mossa <= 6; mossa++) {
+      if (mossa == lastMove || mossa == 7 - lastMove) continue; // Salta mosse proibite
+
+      // 1. Chi porta a 0 vince
+      if (remaining - mossa == 0) {
+        movesList.put(stateKey, mossa);
+        return mossa;
+      }
+
+      // 2. Chi porta sotto zero perde
+      if (remaining - mossa < 0) continue;
+
+      // 3. Se esiste una mossa che porta l'avversario in una posizione perdente, io vinco
+      if (canWin(remaining - mossa, mossa) == 0) {
+        movesList.put(stateKey, mossa);
+        return mossa;
+      }
+    }
+
+    // Se nessuna mossa porta alla vittoria
+    movesList.put(stateKey, 0);
+    return 0;
+  }
+
 
   /***   M A I N   ***/
-  static void main(String[] args) {
+  static void main() {
     System.out.println(INTRO);
     getTarget();
     while (progressive < target) {
