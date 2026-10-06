@@ -1,5 +1,5 @@
-//package it.unicam.cs.asdl.es1;
-//package es1.src.main.java.it.unicam.cs.asdl.es1;
+//package it.unicam.cs.asdl.es1;  //era questo quello originale??
+//package es1.src.main.java.it.unicam.cs.asdl.es1;  //o era questo??
 package ST0853_Algoritmi_e_strutture_dati.es1;
 
 /**

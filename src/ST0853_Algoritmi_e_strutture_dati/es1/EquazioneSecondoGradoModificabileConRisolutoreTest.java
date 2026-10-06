@@ -1,4 +1,3 @@
-//package es1.src.test.java.it.unicam.cs.asdl.es1;
 package ST0853_Algoritmi_e_strutture_dati.es1;
 
 
