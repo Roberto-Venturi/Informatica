@@ -10,122 +10,137 @@ package ST0853_Algoritmi_e_strutture_dati.es4;
  */
 public class Prenotazione implements Comparable<Prenotazione> {
 
-    private final Aula aula;
+   private final Aula aula;
 
-    private final TimeSlot timeSlot;
+   private final TimeSlot timeSlot;
 
-    // Campo modificabile escluso dall'identità logica.
-    private String docente;
+   // Campo modificabile escluso dall'identità logica.
+   private String docente;
 
-    private String motivo;
+   private String motivo;
 
-    /**
-     * Costruisce una prenotazione con identità fissata da aula e time slot.
-     * @param aula aula prenotata
-     * @param timeSlot intervallo prenotato
-     * @param docente docente responsabile
-     * @param motivo motivo della prenotazione
-     * @throws NullPointerException se un argomento è null
-     */
-    public Prenotazione(Aula aula, TimeSlot timeSlot, String docente,
-                        String motivo) {
-       if (aula == null || timeSlot == null || docente == null || motivo == null)
-          throw new NullPointerException(); // io farei 4 if separati con messaggi circostanziati
-       this.aula = aula;
-       this.timeSlot = timeSlot;
-       this.docente = docente;
-       this.motivo = motivo;
-    }
+   /**
+    * Costruisce una prenotazione con identità fissata da aula e time slot.
+    *
+    * @param aula     aula prenotata
+    * @param timeSlot intervallo prenotato
+    * @param docente  docente responsabile
+    * @param motivo   motivo della prenotazione
+    * @throws NullPointerException se un argomento è null
+    */
+   public Prenotazione(Aula aula, TimeSlot timeSlot, String docente,
+                       String motivo) {
+      if (aula == null || timeSlot == null || docente == null || motivo == null)
+         throw new NullPointerException(); // io farei 4 if separati con messaggi circostanziati
+      this.aula = aula;
+      this.timeSlot = timeSlot;
+      this.docente = docente;
+      this.motivo = motivo;
+   }
 
-    /**
-     * Restituisce l'aula che partecipa all'identità logica.
-     * @return aula della prenotazione
-     */
-    public Aula getAula() {
-        return aula;
-    }
+   /**
+    * Restituisce l'aula che partecipa all'identità logica.
+    *
+    * @return aula della prenotazione
+    */
+   public Aula getAula() {
+      return aula;
+   }
 
-    /**
-     * Restituisce l'intervallo della prenotazione.
-     * @return time slot
-     */
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
-    }
+   /**
+    * Restituisce l'intervallo della prenotazione.
+    *
+    * @return time slot
+    */
+   public TimeSlot getTimeSlot() {
+      return timeSlot;
+   }
 
-    /**
-     * Restituisce il docente, attributo modificabile non identitario.
-     * @return docente
-     */
-    public String getDocente() {
-        return docente;
-    }
+   /**
+    * Restituisce il docente, attributo modificabile non identitario.
+    *
+    * @return docente
+    */
+   public String getDocente() {
+      return docente;
+   }
 
-    /**
-     * Restituisce il motivo, attributo modificabile non identitario.
-     * @return motivo
-     */
-    public String getMotivo() {
-        return motivo;
-    }
+   /**
+    * Restituisce il motivo, attributo modificabile non identitario.
+    *
+    * @return motivo
+    */
+   public String getMotivo() {
+      return motivo;
+   }
 
-    /**
-     * Modifica il docente senza cambiare l'identità logica.
-     * @param docente nuovo docente; il contratto originale del setter ammette null
-     */
-    public void setDocente(String docente) {
-        this.docente = docente;
-    }
+   /**
+    * Modifica il docente senza cambiare l'identità logica.
+    *
+    * @param docente nuovo docente; il contratto originale del setter ammette null
+    */
+   public void setDocente(String docente) {
+      this.docente = docente;
+   }
 
-    /**
-     * Modifica il motivo senza cambiare l'identità logica.
-     * @param motivo nuovo motivo; il contratto originale del setter ammette null
-     */
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+   /**
+    * Modifica il motivo senza cambiare l'identità logica.
+    *
+    * @param motivo nuovo motivo; il contratto originale del setter ammette null
+    */
+   public void setMotivo(String motivo) {
+      this.motivo = motivo;
+   }
 
-    /**
-     * Calcola l'hash usando solo aula e time slot, come equals.
-     * @return codice hash della prenotazione
-     */
-    @Override
-    public int hashCode() {
-        // TODO implementare
-        return -1;
-    }
+   /**
+    * Calcola l'hash usando solo aula e time slot, come equals.
+    *
+    * @return codice hash della prenotazione
+    */
+   @Override
+   public int hashCode() {
+      return aula.hashCode() + timeSlot.hashCode();
+   }
 
-    /**
-     * Confronta soltanto aula e time slot, non docente e motivo.
-     * @param obj oggetto da confrontare
-     * @return true se la prenotazione ha la stessa aula e lo stesso intervallo
-     */
-    @Override
-    public boolean equals(Object obj) {
-        // TODO implementare
-        return false;
-    }
+   /**
+    * Confronta soltanto aula e time slot, non docente e motivo.
+    *
+    * @param obj oggetto da confrontare
+    * @return true se la prenotazione ha la stessa aula e lo stesso intervallo
+    */
+   @Override
+   public boolean equals(Object obj) {
+      if (!(obj instanceof Prenotazione))
+         return false;
+      return (aula.equals(((Prenotazione) obj).aula) && timeSlot.equals(((Prenotazione) obj).timeSlot));
+   }
 
-    /**
-     * Ordina prima per time slot, poi per aula; coerente con equals.
-     * @param o altra prenotazione
-     * @return risultato del confronto lessicografico
-     * @throws NullPointerException se o è null
-     */
-    @Override
-    public int compareTo(Prenotazione o) {
-        // TODO implementare
-        return -1;
-    }
+   /**
+    * Ordina prima per time slot, poi per aula; coerente con equals.
+    *
+    * @param o altra prenotazione
+    * @return risultato del confronto lessicografico
+    * @throws NullPointerException se o è null
+    */
+   @Override
+   public int compareTo(Prenotazione o) {
+      if (o == null)
+         throw new NullPointerException();
+      if (timeSlot.equals(o.timeSlot))
+         return aula.compareTo(o.aula);
+      /*else*/
+      return timeSlot.compareTo(o.timeSlot);
+   }
 
-    /**
-     * Restituisce una rappresentazione testuale della prenotazione.
-     * @return descrizione testuale, senza stampare sullo standard output
-     */
-    @Override
-    public String toString() {
-        return "Prenotazione [aula = " + aula + ", time slot =" + timeSlot
-                + ", docente=" + docente + ", motivo=" + motivo + "]";
-    }
+   /**
+    * Restituisce una rappresentazione testuale della prenotazione.
+    *
+    * @return descrizione testuale, senza stampare sullo standard output
+    */
+   @Override
+   public String toString() {
+      return "Prenotazione [aula = " + aula + ", time slot =" + timeSlot
+            + ", docente=" + docente + ", motivo=" + motivo + "]";
+   }
 
 }
