@@ -30,7 +30,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#hashCode()}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#hashCode()}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -52,7 +52,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#Prenotazione(it.unicam.cs.asdl.es4.Aula, it.unicam.cs.asdl.es4.TimeSlot, String, String)}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#Prenotazione(it.unicam.cs.asdl.es4.Aula, it.unicam.cs.asdl.es4.TimeSlot, String, String)}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -78,7 +78,7 @@ class PrenotazioneTest {
     }
 
     /**
-     * Test method for {@link it.unicam.cs.asdl.es4.Prenotazione#getAula()}.
+     * Test method for {link it.unicam.cs.asdl.es4.Prenotazione#getAula()}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -93,7 +93,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#getTimeSlot()}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#getTimeSlot()}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -111,7 +111,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#getDocente()}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#getDocente()}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -126,7 +126,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#getMotivo()}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#getMotivo()}.
      */
     // Test del contratto pubblico e dei suoi casi limite.
     @Test
@@ -141,7 +141,7 @@ class PrenotazioneTest {
 
     /**
      * Test method for
-     * {@link it.unicam.cs.asdl.es4.Prenotazione#equals(Object)}.
+     * {link it.unicam.cs.asdl.es4.Prenotazione#equals(Object)}.
      */
     @SuppressWarnings("unlikely-arg-type")
     // Test del contratto pubblico e dei suoi casi limite.
