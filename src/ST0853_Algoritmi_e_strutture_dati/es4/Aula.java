@@ -265,7 +265,6 @@ public class Aula implements Comparable<Aula> {
       public void addPrenotazione (TimeSlot ts, String docente, String motivo){
          if (ts == null || docente == null || docente.isEmpty() || motivo == null || motivo.isEmpty())
             throw new NullPointerException("ts, Docente o Motivo non validi");
-         // TODO implementare
          for (int i = 0; i < this.numPrenotazioni; i++) {
             if (this.prenotazioni[i].getTimeSlot().overlapsWith(ts))
                throw new IllegalArgumentException("ts già occupato");
