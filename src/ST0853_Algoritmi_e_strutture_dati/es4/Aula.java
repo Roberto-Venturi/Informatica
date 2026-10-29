@@ -276,5 +276,4 @@ public class Aula implements Comparable<Aula> {
          prenotazioni[numPrenotazioni++] = new Prenotazione(this, ts, docente, motivo);
       }
 
-      // TODO inserire eventuali metodi privati per questioni di organizzazione
    }
